@@ -1,21 +1,33 @@
 import './style.css';
-const gameName = 'Leader Gamer';
+import Game from './modules/game.js';
+import Display from './modules/display.js';
 
-const startNewGame = async (gameName) => {
-  const requestURL = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/';
-  const res = await fetch(requestURL, {
-    method: 'POST',
-    body: JSON.stringify({
-      name: `${gameName}`,
-    }),
-    headers: {
-      'Content-type': 'application/json; charset=UTF-8',
-    },
-  });
+const gameName = 'Leader Game';
+const game = new Game(gameName);
+const display = new Display();
 
-  const newGame = await res.json();
+const form = document.querySelector('form');
+const refreshBtn = document.querySelector('.section-head button');
 
-  return newGame;
+const resfreshList = async () => {
+  const scores = await game.getScores();
+  display.displayScores(scores.result);
 };
 
-startNewGame(gameName);
+const render = async () => {
+  await game.start();
+  await resfreshList();
+};
+
+const addScore = async (e) => {
+  e.preventDefault();
+  const user = document.getElementById('name');
+  const score = document.getElementById('score');
+  await game.addScoreToGame(user.value, score.value);
+  user.value = '';
+  score.value = '';
+};
+
+render();
+form.addEventListener('submit', addScore);
+refreshBtn.addEventListener('click', resfreshList);
