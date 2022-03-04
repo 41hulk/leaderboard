@@ -20,7 +20,7 @@ export default class Game {
     return newGame;
   };
 
-  // get id from new game
+
   start = async () => {
     const game = await this.#startNewGame(this.gameName);
     const findId = game.result.match(/(\w+)\sadded\.$/);
@@ -32,11 +32,10 @@ export default class Game {
     }
   };
 
-  // add to score to game
+
   addScoreToGame = async (user, score) => {
     const url = `${this.requestURL}${this.id}/scores`;
 
-    // first test
     const res = await fetch(url, {
       method: 'POST',
       body: JSON.stringify({
