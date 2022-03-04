@@ -20,7 +20,6 @@ export default class Game {
     return newGame;
   };
 
-
   start = async () => {
     const game = await this.#startNewGame(this.gameName);
     const findId = game.result.match(/(\w+)\sadded\.$/);
@@ -31,7 +30,6 @@ export default class Game {
       this.id = id;
     }
   };
-
 
   addScoreToGame = async (user, score) => {
     const url = `${this.requestURL}${this.id}/scores`;

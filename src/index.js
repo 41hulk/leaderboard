@@ -26,7 +26,7 @@ const addScore = async (e) => {
   await game.addScoreToGame(user.value, score.value);
   user.value = '';
   score.value = '';
-  await resfreshList()
+  await resfreshList();
 };
 
 render();
