@@ -5,7 +5,7 @@ export default class Display {
       scoresList.style.display = 'none';
     } else {
       scoresList.style.display = 'block';
-    }clear;
+    }
 
     scores = this.#orderScores(scores);
     scoresList.innerHTML = '';
